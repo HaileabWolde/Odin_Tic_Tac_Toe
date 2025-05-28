@@ -1,16 +1,10 @@
 const GameBoard = (function() {
     const gameBoard = [
-        '', '', '', 
-        '', '', '', 
-        '', '', ''];
-    let playerOne = '';
-    let playerTwo = '';
-    const changePlayerOneMarker = (marker) =>{
-        playerOne = marker;
-    }
-    const changePlayerTwoMarker = (marker) =>{
-        playerTwo = marker;
-    }
+       ['', '', ''], 
+       ['', '', ''],
+       ['', '', '']];
+    let playerOne = (marker)=> marker;
+    let playerTwo = (marker)=> marker;
     const getgameBoard = (indexOne, indexTwo, playerMarker) => {
         if(gameBoard[indexOne][indexTwo] === ''){
             gameBoard[indexOne][indexTwo] = playerMarker;
@@ -21,33 +15,41 @@ const GameBoard = (function() {
     }
     const checkWinner = () =>{
         for (let i = 0; i < 3; i++){
-            for (let j = 0; j < 3; j++){
-                if (gameBoard[i][j] === playerOne.marker && gameBoard[i][j+1] === playerOne.marker && gameBoard[i][j+2] === playerOne.marker) {
-                    return playerOne.name + ' wins!';
-                }
-                else if (gameBoard[i][j] === playerTwo.marker && gameBoard[i][j+1] === playerTwo.marker && gameBoard[i][j+2] === playerTwo.marker) {
-                    return playerTwo.name + ' wins!';
-                }
-                else if (gameBoard[j][i] === playerOne.marker && gameBoard[j+1][i] === playerOne.marker && gameBoard[j+2][i] === playerOne.marker) {
-                    return playerOne.name + ' wins!';
-                }
-                else if (gameBoard[j][i] === playerTwo.marker && gameBoard[j+1][i] === playerTwo.marker && gameBoard[j+2][i] === playerTwo.marker) {
-                    return playerTwo.name + ' wins!';
-                }
-                else if( gameBoard[0][0] === playerOne.marker && gameBoard[1][1] === playerOne.marker && gameBoard[2][2] === playerOne.marker) {
-                    return playerOne.name + ' wins!';
-                }
-                else if( gameBoard[0][0] === playerTwo.marker && gameBoard[1][1] === playerTwo.marker && gameBoard[2][2] === playerTwo.marker) {
-                    return playerTwo.name + ' wins!';
-                }
-                else if( gameBoard[0][2] === playerOne.marker && gameBoard[1][1] === playerOne.marker && gameBoard[2][0] === playerOne.marker) {
-                    return playerOne.name + ' wins!';
-                }
-                else ( gameBoard[0][2] === playerTwo.marker && gameBoard[1][1] === playerTwo.marker && gameBoard[2][0] === playerTwo.marker) {
-                    return playerTwo.name + ' wins!';
-                }
+            // Check rows
+            if (gameBoard [i][0] != '' && 
+                gameBoard[i][0] === gameBoard[i][1] && 
+                gameBoard[i][1] === gameBoard[i][2]) {
+                console.log(`Winner is ${gameBoard[i][0]} in row ${i}`);
+                return;
+            }
+            // Check columns 
+            if (gameBoard[0][i] != '' && 
+                gameBoard[0][i] === gameBoard[1][i] && 
+                gameBoard[1][i] === gameBoard[2][i]) {
+                console.log(`Winner is ${gameBoard[0][i]} in column ${i}`);
+                return;
             }
         }
+         // Check diagonals
+            if (gameBoard[0][0] != '' && 
+                gameBoard[0][0] === gameBoard[1][1] && 
+                gameBoard[1][1] === gameBoard[2][2]) {
+                console.log(`Winner is ${gameBoard[0][0]} in diagonal`);
+                return;
+            }
+            if (gameBoard[0][2] != '' && 
+                gameBoard[0][2] === gameBoard[1][1] && 
+                gameBoard[1][1] === gameBoard[2][0]) {
+                console.log(`Winner is ${gameBoard[0][2]} in diagonal`);
+                return;
+            }
+    }
+    return {
+        getgameBoard,
+        checkWinner,
+        playerOne,
+        playerTwo,
+        gameBoard
     }
 })();
 function createPlayer(name, marker){
@@ -58,4 +60,16 @@ function createPlayer(name, marker){
 }
 const playerOne = createPlayer('Player 1', 'X');
 const playerTwo = createPlayer('Player 2', 'O');
+GameBoard.playerOne(playerOne.marker);
+GameBoard.playerTwo(playerTwo.marker);
+GameBoard.getgameBoard(1, 0, playerOne.marker);
+GameBoard.getgameBoard(2, 1, playerOne.marker);
+GameBoard.getgameBoard(1, 1, playerOne.marker);
+GameBoard.getgameBoard(1, 2, playerOne.marker);
+GameBoard.checkWinner();
+const result = GameBoard.checkWinner();
+if (result){
+    console.log(result);
+}
+console.log(GameBoard.gameBoard);
 
