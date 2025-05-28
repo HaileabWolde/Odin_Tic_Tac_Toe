@@ -1,0 +1,61 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  *{
+      box-sizing: border-box;
+  }
+  h1{
+    font-family: "Roboto", serif;
+    font-weight: 800;
+  }
+  .container{
+     height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* <-- centers vertically */
+  align-items: center;     /* <-- centers horizontally */
+  }
+  .main {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #14bdac;
+
+}
+.gameBoard {
+    height: 60%;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: none;
+}
+.marker{
+    border: 2px solid black;
+    cursor: pointer;
+
+}
+/* Remove top border of the first row */
+.marker:nth-child(-n+3) {
+    border-top: none;
+}
+
+/* Remove bottom border of the last row */
+.marker:nth-child(n+7) {
+    border-bottom: none;
+}
+/* Remove left border of the first column (1, 4, 7) */
+.marker:nth-child(3n + 1) {
+  border-left: none;
+}
+
+/* Remove right border of the last column (3, 6, 9) */
+.marker:nth-child(3n) {
+  border-right: none;
+}
