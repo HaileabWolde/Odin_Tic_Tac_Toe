@@ -1,3 +1,16 @@
+let gameBoard = document.querySelector('.gameBoard');
+let playerOneBoolean = true;
+function displayBoard(e, playerOne, playerTwo){
+    const input = e.target.id;
+    if (playerOneBoolean) {
+        console.log(`Player 1: ${playerOne}`);
+    }
+    else {
+        console.log(`Player 2: ${playerTwo}`);
+    }
+    playerOneBoolean = !playerOneBoolean;
+
+}
 const GameBoard = (function() {
     const gameBoard = [
        ['', '', ''], 
@@ -67,5 +80,7 @@ const result = GameBoard.checkWinner();
 if (result){
     console.log(result);
 }
-console.log(GameBoard.gameBoard);
+gameBoard.addEventListener('click', (e) => {
+    displayBoard(e, playerOne.marker, playerTwo.marker);
+});
 
