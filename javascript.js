@@ -1,7 +1,22 @@
 let gameBoard = document.querySelector('.gameBoard');
+let markers = document.querySelectorAll('.marker');
+// This is a simple implementation of a Tic Tac Toe game using JavaScript.
 let playerOneBoolean = true;
 function displayBoard(e, playerOne, playerTwo){
+    console.log(GameBoard.gameBoard);
     const input = e.target.id;
+    for (let i = 0; i < markers.length; i++) {
+        if (markers[i].id === input) {
+            if (playerOneBoolean) {
+                markers[i].textContent = playerOne;
+                GameBoard.getgameBoard( Math.floor(i / 3), i % 3, playerOne);
+            }
+            else {
+                markers[i].textContent = playerTwo;
+                GameBoard.getgameBoard(Math.floor(i/3), i % 3, playerTwo);
+            }
+        }
+    }
     if (playerOneBoolean) {
         console.log(`Player 1: ${playerOne}`);
     }
@@ -69,12 +84,7 @@ function createPlayer(name, marker){
 }
 const playerOne = createPlayer('Player 1', 'X');
 const playerTwo = createPlayer('Player 2', 'O');
-GameBoard.getgameBoard(1, 0, playerTwo.marker);
-GameBoard.getgameBoard(2, 1, playerTwo.marker);
-GameBoard.getgameBoard(1, 1, playerTwo.marker);
-GameBoard.getgameBoard(1, 2, playerOne.marker);
-GameBoard.getgameBoard(2, 0, playerTwo.marker);
-GameBoard.getgameBoard(2, 2, playerTwo.marker);
+
 GameBoard.checkWinner();
 const result = GameBoard.checkWinner();
 if (result){
