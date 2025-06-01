@@ -39,6 +39,9 @@ html, body{
 .marker{
     border: 2px solid black;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 /* Remove top border of the first row */

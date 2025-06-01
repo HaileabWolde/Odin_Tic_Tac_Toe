@@ -1,27 +1,28 @@
 let gameBoard = document.querySelector('.gameBoard');
 let markers = document.querySelectorAll('.marker');
+
 // This is a simple implementation of a Tic Tac Toe game using JavaScript.
 let playerOneBoolean = true;
 function displayBoard(e, playerOne, playerTwo){
-    console.log(GameBoard.gameBoard);
     const input = e.target.id;
     for (let i = 0; i < markers.length; i++) {
-        if (markers[i].id === input) {
+        if (markers[i].id === input && markers[i].textContent.trim() === '') {
+            // Check if the clicked marker is empty
             if (playerOneBoolean) {
                 markers[i].textContent = playerOne;
                 GameBoard.getgameBoard( Math.floor(i / 3), i % 3, playerOne);
+
             }
             else {
                 markers[i].textContent = playerTwo;
                 GameBoard.getgameBoard(Math.floor(i/3), i % 3, playerTwo);
             }
+            GameBoard.checkWinner();
+            const result = GameBoard.checkWinner();
+            if (result){
+               console.log(result);
+            }
         }
-    }
-    if (playerOneBoolean) {
-        console.log(`Player 1: ${playerOne}`);
-    }
-    else {
-        console.log(`Player 2: ${playerTwo}`);
     }
     playerOneBoolean = !playerOneBoolean;
 
@@ -65,9 +66,26 @@ const GameBoard = (function() {
             }
             if (gameBoard[0][2] != '' && 
                 gameBoard[0][2] === gameBoard[1][1] && 
-                gameBoard[1][1] === gameBoard[2][0]) {
+                gameBoard[1][1] === gameBoard[2][0]) 
+                {
                 console.log(`Winner is ${gameBoard[0][2]}`);
                 return;
+            }
+            else{
+                // Check for a draw
+                let isDraw = true;
+                for (let i = 0; i < gameBoard.length; i++) {
+                    for (let j = 0; j < gameBoard[i].length; j++) {
+                        if (gameBoard[i][j] === '') {
+                            isDraw = false;
+                            break;
+                        }
+                    }
+                }
+                if (isDraw) {
+                    console.log('It\'s a draw!');
+                    return;
+                }
             }
     }
     return {
@@ -84,12 +102,7 @@ function createPlayer(name, marker){
 }
 const playerOne = createPlayer('Player 1', 'X');
 const playerTwo = createPlayer('Player 2', 'O');
-
-GameBoard.checkWinner();
-const result = GameBoard.checkWinner();
-if (result){
-    console.log(result);
-}
+// Add event listener to the game board to handle clicks
 gameBoard.addEventListener('click', (e) => {
     displayBoard(e, playerOne.marker, playerTwo.marker);
 });
