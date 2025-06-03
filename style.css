@@ -18,6 +18,16 @@ html, body{
     justify-content: center; /* <-- centers vertically */
   align-items: center;     /* <-- centers horizontally */
   }
+  .scoreBoardContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .scoreBoard{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
   .main {
     height: 60%;
     width: 100%;
@@ -36,6 +46,7 @@ html, body{
     grid-template-rows: repeat(3, 1fr);
     border: none;
 }
+
 .marker{
     border: 2px solid black;
     cursor: pointer;
