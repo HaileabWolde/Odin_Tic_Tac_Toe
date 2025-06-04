@@ -55,6 +55,68 @@ html, body{
     align-items: center;
 
 }
+.buttonContainer{
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.buttonContainer>button {
+    font-family: serif;
+    border: 2px solid #54ACDB;
+    outline: none;
+    width: 30%;
+    background-color: #0c85c6;
+    font-family: serif;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+}
+.buttonContainer>button:hover {
+    background-color: #0a6f9b;
+    scale: 1.05;
+    transition: 0.3s;
+}
+.players {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+#player1{
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #54ACDB;
+  padding: 10px;
+  font-family: serif;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+#player2{
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #54ACDB;
+  padding: 10px;
+  font-family: serif;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #54ACDB;
+    outline: none;
+    font-family: serif;
+    background-color: #f8f9fa;
+}
+.player1, .player2 {
+   display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 /* Remove top border of the first row */
 .marker:nth-child(-n+3) {
     border-top: none;

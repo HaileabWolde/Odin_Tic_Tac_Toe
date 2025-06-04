@@ -59,6 +59,7 @@ const GameBoard = (function() {
                 } else if (winner === 'O') {
                     player2score.textContent = parseInt(player2score.textContent) + 1;
                 }
+                alert('' + winner + ' wins!');
                  resetGame.reset()
                 return;
             }
