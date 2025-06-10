@@ -28,8 +28,8 @@ function handleClick(e) {
     playerOne.marker = playerOneMarker;
     playerTwo.marker = playerTwoMarker;
     // Update the display with the new player names and markers
-    playerOneName.textContent = playerOne.name;
-    playerTwoName.textContent = playerTwo.name;
+    playerOneName.textContent = playerOne.name.toUpperCase();
+    playerTwoName.textContent = playerTwo.name.toUpperCase();
     displayBoard(e, playerOne.marker, playerTwo.marker);
 }
 function displayBoard(e, playerOne, playerTwo){
