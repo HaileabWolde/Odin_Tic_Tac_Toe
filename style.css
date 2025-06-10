@@ -93,6 +93,7 @@ html, body{
   font-family: serif;
   background-color: #f8f9fa;
   cursor: pointer;
+  outline: none;
 }
 #player2{
   width: 100%;
@@ -102,6 +103,7 @@ html, body{
   font-family: serif;
   background-color: #f8f9fa;
   cursor: pointer;
+  outline: none;
 }
 input[type="text"] {
     width: 100%;

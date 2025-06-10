@@ -5,7 +5,8 @@ let player2score = document.querySelector('.player2score');
 let drawScore = document.querySelector('.drawscore');
 let resetButton = document.querySelector('.resetButton');
 let startButton = document.querySelector('.startButton');
-
+let playerOneName = document.querySelector('.playerOneName');
+let playerTwoName = document.querySelector('.playerTwoName');
 // Odin Project - Tic Tac Toe
 // This is a simple implementation of a Tic Tac Toe game using JavaScript.
 let playerOneBoolean = true;
@@ -26,13 +27,17 @@ function handleClick(e) {
     playerTwo.name = player2Name.value || 'Player 2';
     playerOne.marker = playerOneMarker;
     playerTwo.marker = playerTwoMarker;
+    // Update the display with the new player names and markers
+    playerOneName.textContent = playerOne.name;
+    playerTwoName.textContent = playerTwo.name;
     displayBoard(e, playerOne.marker, playerTwo.marker);
 }
 function displayBoard(e, playerOne, playerTwo){
     const input = e.target.id;
     for (let i = 0; i < markers.length; i++) {
         if (markers[i].id === input && markers[i].textContent.trim() === '') {
-            console.log(GameBoard.gameBoard);
+            // If the clicked marker is empty, set the text content to the current player's marker
+            // and update the game board
             // Check if the clicked marker is empty
             if (playerOneBoolean) {
                 markers[i].textContent = playerOne;
@@ -61,162 +66,64 @@ const GameBoard = (function() {
             console.log('This position is already taken');
         }
     }
-    const checkWinner = () =>{
-        for (let i = 0; i < 3; i++){
-            // Check rows
-            if (gameBoard [i][0] != '' && 
-                gameBoard[i][0] === gameBoard[i][1] && 
-                gameBoard[i][1] === gameBoard[i][2]) {
-                    const winner = gameBoard[i][0];
-                // Update the score for the winner
-                if (winner === 'X' && playerOne.marker === 'X') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                        }, 100)
-                    
-                }
-                else if (winner === 'X' && playerTwo.marker === 'X') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {          
-                        alert(playerTwo.name + ' wins!');   
-                    }, 100)
-                }
-                 else if (winner === 'O' && playerOne.marker === 'O') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
-                else if (winner === 'O' && playerTwo.marker === 'O') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                  setTimeout(() => {
-                    resetGame.reset()}, 2000);
-            }
-            // Check columns 
-            if (gameBoard[0][i] != '' && 
-                gameBoard[0][i] === gameBoard[1][i] && 
-                gameBoard[1][i] === gameBoard[2][i]) {
-                // Update the score for the winner
-                if (gameBoard[0][i] === 'X' && playerOne.marker === 'X') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                     setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                        }, 100)
-                }
-                else if (gameBoard[0][i] === 'X' && playerTwo.marker === 'X') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                else if (gameBoard[0][i] === 'O' && playerOne.marker === 'O') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
-                 else if (gameBoard[0][i] === 'O' && playerTwo.marker === 'O') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                       setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                setTimeout(() => {
-                    resetGame.reset()}, 2000);
-            }
+  const checkWinner = () => {
+    for (let i = 0; i < 3; i++) {
+        // Check rows
+        if (gameBoard[i][0] !== '' && gameBoard[i][0] === gameBoard[i][1] && gameBoard[i][1] === gameBoard[i][2]) {
+            announceWinner(gameBoard[i][0]);
+            return;
         }
-         // Check diagonals
-            if (gameBoard[0][0] != '' && 
-                gameBoard[0][0] === gameBoard[1][1] && 
-                gameBoard[1][1] === gameBoard[2][2]) {
-                // Update the score for the winner
-                if (gameBoard[0][0] === 'X' && playerOne.marker === 'X') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                     setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
-                else if (gameBoard[0][0] === 'X' && playerTwo.marker === 'X') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                else if (gameBoard[0][0] === 'O' && playerOne.marker === 'O') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
-                 else if (gameBoard[0][0] === 'O' && playerTwo.marker === 'O') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                setTimeout(() => {
-                    resetGame.reset()}, 2000);
-            }
-            if (gameBoard[0][2] != '' && 
-                gameBoard[0][2] === gameBoard[1][1] && 
-                gameBoard[1][1] === gameBoard[2][0]) 
-                {
-                // Update the score for the winner 
-                if (gameBoard[0][2] === 'X' && playerOne.marker === 'X') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
-                else if (gameBoard[0][2] === 'X' && playerTwo.marker === 'X') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                else if (gameBoard[0][2] === 'O' && playerOne.marker === 'O') {
-                    player1score.textContent = parseInt(player1score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerOne.name + ' wins!');
-                    }, 100)
-                }
 
-                 else if (gameBoard[0][2] === 'O' && playerTwo.marker === 'O') {
-                    player2score.textContent = parseInt(player2score.textContent) + 1;
-                    setTimeout(() => {
-                        alert(playerTwo.name + ' wins!');
-                    }, 100)
-                }
-                  setTimeout(() => {
-                    resetGame.reset()}, 2000);
-            }
-            else{
-                // Check for a draw
-                let isDraw = true;
-                for (let i = 0; i < gameBoard.length; i++) {
-                    for (let j = 0; j < gameBoard[i].length; j++) {
-                        if (gameBoard[i][j] === '') {
-                            isDraw = false;
-                            break;
-                        }
-                    }
-                }
-                if (isDraw) {
-                    drawScore.textContent = parseInt(drawScore.textContent) + 1;
-                    setTimeout(() => {
-                        alert("It's a draw!");
-                    }, 100);
-                  setTimeout(() => {
-                    resetGame.reset()}, 2000);
-                }
-            }
+        // Check columns
+        if (gameBoard[0][i] !== '' && gameBoard[0][i] === gameBoard[1][i] && gameBoard[1][i] === gameBoard[2][i]) {
+            announceWinner(gameBoard[0][i]);
+            return;
+        }
     }
+
+    // Check diagonal top-left to bottom-right
+    if (gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) {
+        announceWinner(gameBoard[0][0]);
+        return;
+    }
+
+    // Check diagonal top-right to bottom-left
+    if (gameBoard[0][2] !== '' && gameBoard[0][2] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][0]) {
+        announceWinner(gameBoard[0][2]);
+        return;
+    }
+
+    // Check for draw
+    let isDraw = true;
+    for (let row of gameBoard) {
+        if (row.includes('')) {
+            isDraw = false;
+            break;
+        }
+    }
+    if (isDraw) {
+        drawScore.textContent = parseInt(drawScore.textContent) + 1;
+        setTimeout(() => {
+            alert('It\'s a draw!');
+            resetGame.reset();
+        }, 100);
+    }
+};
+function announceWinner(marker) {
+    const winnerName = (playerOne.marker === marker) ? playerOne.name : playerTwo.name;
+
+    if (marker === playerOne.marker) {
+        player1score.textContent = parseInt(player1score.textContent) + 1;
+    } else {
+        player2score.textContent = parseInt(player2score.textContent) + 1;
+    }
+
+    setTimeout(() => {
+        alert(`${winnerName} wins!`);
+        resetGame.reset();
+    }, 100);
+}
+
     return {
         getgameBoard,
         checkWinner,
