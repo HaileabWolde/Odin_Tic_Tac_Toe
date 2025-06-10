@@ -151,6 +151,7 @@ function createPlayer(name, marker){
         marker: marker
     };
 }
+//creating Player Object For the Player Properties
 const playerOne = createPlayer('Player 1', 'X');
 const playerTwo = createPlayer('Player 2', 'O');
 // Add event listener to the game board to handle clicks
